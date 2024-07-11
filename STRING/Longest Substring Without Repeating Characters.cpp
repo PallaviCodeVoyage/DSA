@@ -52,11 +52,7 @@ public:
         return maxLength;
     }
 };
-/*Use a sliding window [left, right] to represent the current substring.
-Use a hash set to track characters in the current window.
-Expand the window by moving the right pointer and add characters to the hash set.
-If a repeating character is found, move the left pointer to shrink the window until all characters are unique again.
-Time Complexity: O(2n) - Each character will be visited by the right pointer once and by the left pointer once*/
+****************using SET****************
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
