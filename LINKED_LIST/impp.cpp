@@ -19,3 +19,5 @@ ListNode* reverseLL(ListNode* node) {
     }
 
 //making  function and returning the pointer of the last node whic will now be hed imagination sir
+
+/*point 3:because in case of odd no of ll there are more element in frst half*/
