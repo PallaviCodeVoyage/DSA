@@ -148,3 +148,140 @@ int main() {
 
 
 DFS
+can be performed in inorder pre and post ordere both recursively and iteratively so we have iterative app over here
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+void iterativePreorder(Node* root) {
+    if (root == nullptr) return;
+
+    stack<Node*> s;
+    s.push(root);
+
+    while (!s.empty()) {
+        Node* current = s.top();
+        s.pop();
+        cout << current->data << " "; // Process the root
+
+        // Push right child first so that left child is processed first
+        if (current->right) s.push(current->right);
+        if (current->left) s.push(current->left);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    cout << "Preorder (Iterative): ";
+    iterativePreorder(root);
+
+    return 0;
+}
+
+
+2
+
+        #include <iostream>
+#include <stack>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+void iterativeInorder(Node* root) {
+    stack<Node*> s;
+    Node* current = root;
+
+    while (current != nullptr || !s.empty()) {
+        // Reach the leftmost Node of the current Node
+        while (current != nullptr) {
+            s.push(current);
+            current = current->left;
+        }
+
+        // Current must be NULL at this point
+        current = s.top();
+        s.pop();
+        cout << current->data << " "; // Process the root
+
+        // We have visited the node and its left subtree, now it's right subtree's turn
+        current = current->right;
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    cout << "Inorder (Iterative): ";
+    iterativeInorder(root);
+
+    return 0;
+}
+
+#include <iostream>
+#include <stack>
+#include <vector>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+void iterativePostorder(Node* root) {
+    if (root == nullptr) return;
+
+    stack<Node*> s1, s2;
+    s1.push(root);
+
+    while (!s1.empty()) {
+        Node* current = s1.top();
+        s1.pop();
+        s2.push(current);
+
+        if (current->left) s1.push(current->left);
+        if (current->right) s1.push(current->right);
+    }
+
+    // s2 contains the postorder traversal in reverse order
+    while (!s2.empty()) {
+        cout << s2.top()->data << " ";
+        s2.pop();
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    cout << "Postorder (Iterative): ";
+    iterativePostorder(root);
+
+    return 0;
+}
+
