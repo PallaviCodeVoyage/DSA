@@ -1,3 +1,5 @@
+/*****THIS IS LIS VARIANT*****/
+O(N^2)
 class Solution {
 public:
     int dp[1001][1001]; // DP table for memoization
@@ -33,3 +35,27 @@ public:
         return solve(pairs, 0, -1);
     }
 };
+
+
+/****GREEDY APPROACH****/
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[1] < b[1]; // Sort by the second element
+        });
+
+        int curr = INT_MIN;
+        int count = 0;
+
+        for (const auto& pair : pairs) {
+            if (pair[0] > curr) {
+                curr = pair[1];
+                count++;
+            }
+        }
+
+        return count;
+    }
+};
+/*o(nlogn)*/
